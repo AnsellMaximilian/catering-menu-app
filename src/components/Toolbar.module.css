@@ -1,0 +1,20 @@
+.dayTabs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dayTabs > .day {
+    cursor: pointer;
+    flex: 1;
+    padding: 10px;
+}
+
+.dayTabs > .day:hover {
+    background-color: rgb(194, 194, 194);
+}
+
+.dayTabs > .day.selected {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
