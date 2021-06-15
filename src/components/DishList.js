@@ -16,21 +16,25 @@ export default function DishList() {
             key={dish.id} 
             className={`${styles.dishListItem} ${menu.days[settings.day].includes(dish) ? styles.selected : ''}`}
             onClick={() => {
-              setMenu(state => {
-                const newState = {...state};
-                if(!newState.days[settings.day].includes(dish)) newState.days[settings.day].push(dish);
-                console.log(newState)
-                return newState;
-              })
+              const newState = {...menu};
+              if(!newState.days[settings.day].includes(dish)){
+                newState.days[settings.day].push(dish)
+              }else{
+                newState.days[settings.day] = newState.days[settings.day].filter(currentDish => currentDish !== dish)
+              }
+              // console.log({dayArr: newState.days[settings.day], daySeninBrac: newState.days['senin'], daySeninDot: newState.days.senin})
+              setMenu(newState)
             }}
           >
-            <div className={styles.dishListItem__info}>
-              <h2>{dish.name}</h2>
+            <div className={styles.content}>
+              <div className={styles.dishListItem__info}>
+                <h2>{dish.name}</h2>
+              </div>
+              <img
+                className={styles.thumbnail}
+                src={"https:" + dish.thumbnail} 
+                alt={dish.name} />
             </div>
-            <img
-              className={styles.thumbnail}
-              src={"https:" + dish.thumbnail} 
-              alt={dish.name} />
           </div>
         )
     })

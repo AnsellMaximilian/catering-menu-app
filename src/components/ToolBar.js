@@ -29,7 +29,6 @@ export default function ToolBar() {
     return (
         <div>
             <div>
-                <span>Bikin Menu</span>
                 <div className={styles.dayTabs}>
                     <span 
                         className={`${styles.day} ${settings.day === 'senin' ? styles.selected : ''}`} 
@@ -47,24 +46,47 @@ export default function ToolBar() {
                         className={`${styles.day} ${settings.day === 'jumat' ? styles.selected : ''}`} 
                         onClick={() => setDay('jumat')}>Jumat</span>
                 </div>
-                <div>
-                    <div>
-                        <span>Selected Dishes</span>
-                        <ul>
-                            {dishes.filter(dish => menu.days[settings.day].includes(dish)).map(dish => {
-                                return (
-                                    <li key={dish.id}>
-                                        {dish.name}
-                                    </li>
-                                )
-                            })}
-                        </ul>
+                <div className={styles.dayDashboard}>
+                    <div className={styles.selectedDishes}>
+                        <header>
+                            <span className={styles.selectedDishes__title}>Selected Dishes</span>
+                            <div>
+                                <button
+                                    onClick={() => {
+                                        const newState = {...menu};
+                                        newState.days[settings.day] = [];
+                                        setMenu(newState)
+                                    }}                                
+                                >CLEAR</button>
+                            </div>
+                        </header>
+                        {menu.days[settings.day].length > 0 ? (
+                            <ul>
+                                {dishes.filter(dish => menu.days[settings.day].includes(dish)).map(dish => {
+                                    return (
+                                        <li key={dish.id}>
+                                            <span>{dish.name}</span>
+                                            <button
+                                                onClick={() => {
+                                                    const newState = {...menu};
+                                                    newState.days[settings.day] = newState.days[settings.day].filter(currentDish => currentDish !== dish)
+                                                    setMenu(newState)
+                                                }}
+                                            >X</button>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        ) : (
+                            <div>No dishes selected</div>
+                        )
+                        }
                     </div>
                 </div>
 
             </div>
-            <div>
-                <span>Search</span>
+            <div className={styles.searchContainer}>
+                <span>SEARCH</span>
                 <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
             </div>
         </div>

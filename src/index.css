@@ -15,3 +15,12 @@ code {
 * {
   box-sizing: border-box;
 }
+
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  /* color: rgb(73, 73, 73); */
+  cursor: pointer;
+}

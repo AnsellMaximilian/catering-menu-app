@@ -7,6 +7,11 @@
     cursor: pointer;
     flex: 1;
     padding: 10px;
+    border: 1px solid rgb(131, 131, 131);
+}
+
+.dayTabs > .day:not(:first-child) {
+    border-left: none;
 }
 
 .dayTabs > .day:hover {
@@ -17,4 +22,77 @@
     background-color: black;
     color: white;
     font-weight: bold;
+}
+
+.dayDashboard {
+    display: flex;
+    /* padding: 1.5rem; */
+
+}
+
+.selectedDishes {
+    text-align: left;
+    flex: 1;
+    border: rgb(131, 131, 131) 1px solid;
+    /* padding: 1rem; */
+}
+
+.selectedDishes header {
+    display: flex;
+}
+
+.selectedDishes header button {
+    transition: all 0.15s;
+    padding: 0.5rem;
+}
+
+.selectedDishes header button:hover, .selectedDishes > ul > li > button:hover {
+    background-color: rgb(235, 235, 235);
+}
+
+.selectedDishes__title {
+    font-weight: bold;
+    font-size: 1.25rem;
+    flex: 1;
+}
+
+.selectedDishes > ul{
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.selectedDishes > ul > li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgb(131, 131, 131);
+    display: flex;
+    align-items: center;
+}
+
+.selectedDishes > ul > li:last-child {
+    border-bottom: none;
+}
+
+.selectedDishes > ul > li > span {
+    flex: 1;
+}
+
+.selectedDishes > ul > li > button {
+    transition: all 0.15s;
+    width: 2rem;
+    height: 2rem;
+}
+
+.searchContainer {
+    margin-top: 3rem;
+}
+
+.searchContainer > span {
+    margin-right: 1rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.searchContainer > input {
+    font-size: 1.5rem;
 }
