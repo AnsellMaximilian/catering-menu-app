@@ -46,10 +46,6 @@
     padding: 0.5rem;
 }
 
-.selectedDishes header button:hover, .selectedDishes > ul > li > button:hover {
-    background-color: rgb(235, 235, 235);
-}
-
 .selectedDishes__title {
     font-weight: bold;
     font-size: 1.25rem;

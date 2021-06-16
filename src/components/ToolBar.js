@@ -72,7 +72,7 @@ export default function ToolBar() {
                                                     newState.days[settings.day] = newState.days[settings.day].filter(currentDish => currentDish !== dish)
                                                     setMenu(newState)
                                                 }}
-                                            >X</button>
+                                            >&times;</button>
                                         </li>
                                     )
                                 })}

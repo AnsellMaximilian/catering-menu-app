@@ -40,7 +40,7 @@ export default function DishList() {
     })
 
     return (
-        <div className={styles.dishList}>
+        <div className={styles.dishList} id="dish-list">
             {dishListItems}
         </div>
     )

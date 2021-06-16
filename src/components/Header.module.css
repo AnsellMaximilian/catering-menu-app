@@ -1,0 +1,9 @@
+.tools {
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.tools button {
+    padding: 1rem;
+}

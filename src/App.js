@@ -7,14 +7,21 @@ import DishesContext from './contexts/Dishes';
 import MenuContext from './contexts/Menu';
 import SettingsContext from './contexts/Settings';
 import ToolBar from './components/ToolBar';
+import MenuDetail from './components/MenuDetail';
+import MenuPreview from './components/MenuPreview';
+import Menu from './components/Menu';
+import DomToImage from 'dom-to-image';
+
+import defaultMenuThumbnail from './images/default-menu-thumbnail.jpg'
 
 function App() {
   const [dishes, setDishes] = useState([]);
   const [filteredDishes, setFilteredDishes] = useState([]);
   const [menu, setMenu] = useState({
+    menuThumbnail: defaultMenuThumbnail,
     dates: {
-        start: '',
-        end: ''
+        start: (new Date()).toISOString().slice(0, 10),
+        end: new Date((new Date()).setDate((new Date()).getDate() + 7)).toISOString().slice(0, 10)
     },
     days: {
         senin: [],
@@ -26,6 +33,24 @@ function App() {
   });
 
   const [settings, setSettings] = useState({day: 'senin'});
+
+  const [isMenuDetailOpen, setIsMenuDetailOpen] = useState(false);
+  const [isMenuPreviewOpen, setIsMenuPreviewOpen] = useState(false);
+  const [isCreateMode, setIsCreateMode] = useState(true);
+
+  const print = () => {
+    setIsCreateMode(false);
+    DomToImage.toPng(document.querySelector('#menu'))
+      .then(function (dataUrl) {
+          var link = document.createElement('a');
+          link.download = `menu.jpeg`;
+          link.href = dataUrl;
+          link.click();
+      })
+      .catch(function (error) {
+          console.error('oops, something went wrong!', error);
+      });
+  }
 
   useEffect(() => {
     contentful.getEntries({
@@ -51,9 +76,27 @@ function App() {
       <DishesContext.Provider value={{dishes, filteredDishes, setDishes, setFilteredDishes}}>
         <MenuContext.Provider value={{menu, setMenu}}>
           <SettingsContext.Provider value={{settings, setSettings}}>
-            <Header />
-            <ToolBar/>
-            <DishList />
+            <Header 
+              openMenuDetail={() => setIsMenuDetailOpen(true)}
+              openMenuPreview={() => setIsMenuPreviewOpen(true)}
+              setIsCreateMode={setIsCreateMode}
+              print={print}
+            />
+            {isCreateMode ? (
+              <>
+                <ToolBar/>
+                <DishList />
+              </> 
+            ): (
+              <>
+                <button onClick={print}>PRINT</button>
+                <Menu/>
+
+              </>
+            )
+            }
+            <MenuDetail open={isMenuDetailOpen} onClose={() => setIsMenuDetailOpen(false)}/>
+            <MenuPreview open={isMenuPreviewOpen} onClose={() => setIsMenuPreviewOpen(false)}/>
           </SettingsContext.Provider>
         </MenuContext.Provider>
       </DishesContext.Provider>
