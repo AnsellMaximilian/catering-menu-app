@@ -65,7 +65,7 @@ function App() {
           }
           return dishItem;
         });
-
+        console.log(dishes);
         setDishes(dishItems);
         setFilteredDishes(dishItems);
       })
