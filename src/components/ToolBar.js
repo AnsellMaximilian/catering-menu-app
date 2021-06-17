@@ -1,22 +1,20 @@
-import React, { useContext, useEffect, useState } from 'react'
-import DishesContext from '../contexts/Dishes';
+import React, { useContext } from 'react'
 import MenuContext from '../contexts/Menu';
 import SettingsContext from '../contexts/Settings';
 import styles from './Toolbar.module.css';
 
-export default function ToolBar() {
-    const [searchTerm, setSearchTerm] = useState('');
-    const {dishes, setFilteredDishes} = useContext(DishesContext);
+export default function ToolBar({searchTerm, setSearchTerm}) {
+    // const {dishes, setFilteredDishes} = useContext(DishesContext);
     const {menu, setMenu} = useContext(MenuContext);
     const {settings, setSettings} = useContext(SettingsContext)
 
-    useEffect(() => {
-        if(!!searchTerm){
-            setFilteredDishes(dishes.filter(dish => dish.name.toLowerCase().includes(searchTerm.toLowerCase())))
-        }else{
-            setFilteredDishes(dishes)
-        }
-    }, [searchTerm, setFilteredDishes, dishes]);
+    // useEffect(() => {
+    //     if(!!searchTerm){
+    //         setFilteredDishes(dishes.filter(dish => dish.name.toLowerCase().includes(searchTerm.toLowerCase())))
+    //     }else{
+    //         setFilteredDishes(dishes)
+    //     }
+    // }, [searchTerm, setFilteredDishes, dishes]);
 
     const setDay = (day) => {
         setSettings(state => {
@@ -62,14 +60,14 @@ export default function ToolBar() {
                         </header>
                         {menu.days[settings.day].length > 0 ? (
                             <ul>
-                                {dishes.filter(dish => menu.days[settings.day].includes(dish)).map(dish => {
+                                {menu.days[settings.day].map(dish => {
                                     return (
                                         <li key={dish.id}>
                                             <span>{dish.name}</span>
                                             <button
                                                 onClick={() => {
                                                     const newState = {...menu};
-                                                    newState.days[settings.day] = newState.days[settings.day].filter(currentDish => currentDish !== dish)
+                                                    newState.days[settings.day] = newState.days[settings.day].filter(dayDish => dayDish.id !== dish.id)
                                                     setMenu(newState)
                                                 }}
                                             >&times;</button>

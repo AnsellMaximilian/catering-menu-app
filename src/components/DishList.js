@@ -4,7 +4,7 @@ import MenuContext from '../contexts/Menu';
 import SettingsContext from '../contexts/Settings';
 import styles from './DishList.module.css';
 
-export default function DishList() {
+export default function DishList({nextPage, prevPage, page}) {
 
     const {filteredDishes} = useContext(DishesContext)
     const {settings} = useContext(SettingsContext);
@@ -14,15 +14,14 @@ export default function DishList() {
         return (
           <div 
             key={dish.id} 
-            className={`${styles.dishListItem} ${menu.days[settings.day].includes(dish) ? styles.selected : ''}`}
+            className={`${styles.dishListItem} ${menu.days[settings.day].some(dayDish => dayDish.id === dish.id) ? styles.selected : ''}`}
             onClick={() => {
               const newState = {...menu};
-              if(!newState.days[settings.day].includes(dish)){
+              if(!newState.days[settings.day].some(dayDish => dayDish.id === dish.id)){
                 newState.days[settings.day].push(dish)
               }else{
-                newState.days[settings.day] = newState.days[settings.day].filter(currentDish => currentDish !== dish)
+                newState.days[settings.day] = newState.days[settings.day].filter(dayDish => dayDish.id !== dish.id)
               }
-              // console.log({dayArr: newState.days[settings.day], daySeninBrac: newState.days['senin'], daySeninDot: newState.days.senin})
               setMenu(newState)
             }}
           >
@@ -40,8 +39,14 @@ export default function DishList() {
     })
 
     return (
-        <div className={styles.dishList} id="dish-list">
+        <div>
+          <div className={styles.dishList} id="dish-list">
             {dishListItems}
+          </div>
+          <div>
+            <button onClick={prevPage} disabled={page === 0}>PREVIOUS</button>
+            <button onClick={nextPage}>NEXT</button>
+          </div>
         </div>
     )
 }

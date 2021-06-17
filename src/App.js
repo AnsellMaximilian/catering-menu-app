@@ -17,6 +17,7 @@ import defaultMenuThumbnail from './images/default-menu-thumbnail.jpg'
 function App() {
   const [dishes, setDishes] = useState([]);
   const [filteredDishes, setFilteredDishes] = useState([]);
+  const [settings, setSettings] = useState({day: 'senin'});
   const [menu, setMenu] = useState({
     menuThumbnail: defaultMenuThumbnail,
     dates: {
@@ -31,12 +32,14 @@ function App() {
         jumat: [],
     }
   });
-
-  const [settings, setSettings] = useState({day: 'senin'});
-
+  // UI STATES
   const [isMenuDetailOpen, setIsMenuDetailOpen] = useState(false);
   const [isMenuPreviewOpen, setIsMenuPreviewOpen] = useState(false);
   const [isCreateMode, setIsCreateMode] = useState(true);
+
+  //PAGINATION AND FILTER
+  const [page, setPage] = useState(0);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const print = () => {
     setIsCreateMode(false);
@@ -52,9 +55,15 @@ function App() {
       });
   }
 
+  const nextPage = () => setPage(currentPage => (currentPage + 1));
+  const prevPage = () => setPage(currentPage => currentPage === 0 ? 1 : (currentPage - 1))
+
   useEffect(() => {
     contentful.getEntries({
-      'content_type': 'dish'
+      'content_type': 'dish',
+      skip: !!searchTerm ? 0 : page*3,
+      "fields.name[match]": searchTerm,
+      limit: !!searchTerm ? 100 : 3
     })
       .then(dishes => {
         const dishItems = dishes.items.map(item => {
@@ -69,7 +78,7 @@ function App() {
         setDishes(dishItems);
         setFilteredDishes(dishItems);
       })
-  }, []);
+  }, [page, searchTerm]);
 
   return (
     <div className="App">
@@ -84,8 +93,8 @@ function App() {
             />
             {isCreateMode ? (
               <>
-                <ToolBar/>
-                <DishList />
+                <ToolBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+                <DishList nextPage={nextPage} prevPage={prevPage} page={page}/>
               </> 
             ): (
               <>
