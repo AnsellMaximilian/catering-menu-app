@@ -92,6 +92,7 @@ function App() {
               openMenuDetail={() => setIsMenuDetailOpen(true)}
               openMenuPreview={() => setIsMenuPreviewOpen(true)}
               setIsCreateMode={setIsCreateMode}
+              isCreateMode={isCreateMode}
               print={print}
             />
             {isCreateMode ? (
