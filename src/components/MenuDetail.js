@@ -10,6 +10,8 @@ export default function MenuDetail({open, onClose}) {
     const [startDate, setStartDate] = useState(menu.dates.start);
     const [endDate, setEndDate] = useState(menu.dates.end);
     const [menuThumbnail, setMenuThumbnail] = useState('');
+    const [backgroundImage, setBackgroundImage] = useState('');
+
     return (
         <Modal open={open} onClose={onClose}>
             <h2>Menu Detail</h2>
@@ -29,7 +31,23 @@ export default function MenuDetail({open, onClose}) {
                 <div className={styles.form__item}>
                     <label>
                         <span>Menu Thumbnail: </span>
-                        <input type="text" value={menuThumbnail} onChange={e => setMenuThumbnail(e.target.value)}/>
+                        <input 
+                            type="text" 
+                            value={menuThumbnail} 
+                            onChange={e => setMenuThumbnail(e.target.value)}
+                            placeholder="Type image URL"
+                        />
+                    </label>
+                </div>
+                <div className={styles.form__item}>
+                    <label>
+                        <span>Background Image: </span>
+                        <input 
+                            type="text" 
+                            value={backgroundImage} 
+                            onChange={e => setBackgroundImage(e.target.value)}
+                            placeholder="Type image URL"
+                        />
                     </label>
                 </div>
                 <button
@@ -38,6 +56,7 @@ export default function MenuDetail({open, onClose}) {
                         newState.dates.start = startDate;
                         newState.dates.end = endDate;
                         newState.menuThumbnail = menuThumbnail;
+                        newState.backgroundImage = backgroundImage;
                         setMenu(newState);
                         onClose();
                     }}

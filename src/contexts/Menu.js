@@ -3,6 +3,7 @@ import { createContext } from "react";
 const MenuContext = createContext({
     menu: {
         menuThumbnail: '',
+        backgroundImage: '',
         dates: {
             start: '',
             end: ''

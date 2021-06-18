@@ -8,7 +8,6 @@ import MenuContext from './contexts/Menu';
 import SettingsContext from './contexts/Settings';
 import ToolBar from './components/ToolBar';
 import MenuDetail from './components/MenuDetail';
-import MenuPreview from './components/MenuPreview';
 import Menu from './components/Menu';
 import DomToImage from 'dom-to-image';
 
@@ -37,7 +36,6 @@ function App() {
   });
   // UI STATES
   const [isMenuDetailOpen, setIsMenuDetailOpen] = useState(false);
-  const [isMenuPreviewOpen, setIsMenuPreviewOpen] = useState(false);
   const [isCreateMode, setIsCreateMode] = useState(true);
 
   //PAGINATION AND FILTER
@@ -90,7 +88,6 @@ function App() {
           <SettingsContext.Provider value={{settings, setSettings}}>
             <Header 
               openMenuDetail={() => setIsMenuDetailOpen(true)}
-              openMenuPreview={() => setIsMenuPreviewOpen(true)}
               setIsCreateMode={setIsCreateMode}
               isCreateMode={isCreateMode}
               print={print}
@@ -113,7 +110,6 @@ function App() {
             )
             }
             <MenuDetail open={isMenuDetailOpen} onClose={() => setIsMenuDetailOpen(false)}/>
-            <MenuPreview open={isMenuPreviewOpen} onClose={() => setIsMenuPreviewOpen(false)}/>
           </SettingsContext.Provider>
         </MenuContext.Provider>
       </DishesContext.Provider>

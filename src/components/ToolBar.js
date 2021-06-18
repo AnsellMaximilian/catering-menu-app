@@ -78,7 +78,7 @@ export default function ToolBar({searchTerm, setSearchTerm}) {
                 <div className={styles.searchContainer}>
                     <label>
                         <span>SEARCH</span>
-                        <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
+                        <input type="search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
                     </label>
                 </div>
                 <div className={styles.pageLimitContainer}>

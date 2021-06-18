@@ -52,7 +52,7 @@ export default function DishList({page, setPage, itemTotal}) {
           </div>
           <div>
             {
-              Array.from(Array(itemTotal >= settings.pageLimit ? itemTotal/settings.pageLimit : 1)).map((item, index) => (
+              Array.from(Array(Math.ceil(itemTotal/settings.pageLimit))).map((item, index) => (
                 <button 
                   key={index} 
                   disabled={page === index}
