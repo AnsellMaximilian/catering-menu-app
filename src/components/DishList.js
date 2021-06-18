@@ -4,11 +4,14 @@ import MenuContext from '../contexts/Menu';
 import SettingsContext from '../contexts/Settings';
 import styles from './DishList.module.css';
 
-export default function DishList({nextPage, prevPage, page, isEndPage}) {
+export default function DishList({page, setPage, itemTotal}) {
 
     const {filteredDishes} = useContext(DishesContext)
     const {settings} = useContext(SettingsContext);
     const {menu, setMenu} = useContext(MenuContext);
+
+    const nextPage = () => setPage(currentPage => (currentPage + 1));
+    const prevPage = () => setPage(currentPage => currentPage === 0 ? 1 : (currentPage - 1))
 
     const dishListItems = filteredDishes.map(dish => {
         return (
@@ -45,7 +48,20 @@ export default function DishList({nextPage, prevPage, page, isEndPage}) {
           </div>
           <div>
             <button onClick={prevPage} disabled={page === 0}>PREVIOUS</button>
-            <button onClick={nextPage} disabled={isEndPage}>NEXT</button>
+            <button onClick={nextPage} disabled={itemTotal===(settings.pageLimit*(page+1))}>NEXT</button>
+          </div>
+          <div>
+            {
+              Array.from(Array(itemTotal >= settings.pageLimit ? itemTotal/settings.pageLimit : 1)).map((item, index) => (
+                <button 
+                  key={index} 
+                  disabled={page === index}
+                  onClick={() => setPage(index)}
+                >
+                  {index+1}
+                </button>
+              ))
+            }
           </div>
         </div>
     )

@@ -59,9 +59,6 @@ function App() {
       });
   }
 
-  const nextPage = () => setPage(currentPage => (currentPage + 1));
-  const prevPage = () => setPage(currentPage => currentPage === 0 ? 1 : (currentPage - 1))
-
   useEffect(() => {
     contentful.getEntries({
       'content_type': 'dish',
@@ -101,10 +98,9 @@ function App() {
               <>
                 <ToolBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
                 <DishList 
-                  nextPage={nextPage} 
-                  prevPage={prevPage} 
                   page={page}
-                  isEndPage={itemTotal===(settings.pageLimit*(page+1))}
+                  itemTotal={itemTotal}
+                  setPage={setPage}
                 />
               </> 
             ): (
