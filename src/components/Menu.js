@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import MenuContext from '../contexts/Menu';
 import styles from './Menu.module.css';
 import formatDate from '../utils/formatDate';
+import emptyPlateImage from '../images/empty-plate.png';
 
 export default function Menu() {
     const {menu} = useContext(MenuContext);
@@ -18,7 +19,7 @@ export default function Menu() {
             <div className={styles.menuContent}>
                 <div className={styles.dayMenu}>
                     <img 
-                        src={`https:${menu.days.senin.length ? menu.days.senin[0].thumbnail : ''}`} 
+                        src={menu.days.senin.length ? `https:${menu.days.senin[0].thumbnail}` : emptyPlateImage} 
                         alt="day-thumbnail"
                         className={styles.dayMenu__thumbnail}    
                     />
@@ -35,7 +36,7 @@ export default function Menu() {
                 </div>
                 <div className={styles.dayMenu}>
                     <img 
-                        src={`https:${menu.days.selasa.length ? menu.days.selasa[0].thumbnail : ''}`} 
+                        src={menu.days.selasa.length ? `https:${menu.days.selasa[0].thumbnail}` : emptyPlateImage} 
                         alt="day-thumbnail"
                         className={styles.dayMenu__thumbnail}    
                     />
@@ -53,7 +54,7 @@ export default function Menu() {
 
                 <div className={styles.dayMenu}>
                     <img 
-                        src={`https:${menu.days.rabu.length ? menu.days.rabu[0].thumbnail : ''}`} 
+                        src={menu.days.rabu.length ? `https:${menu.days.rabu[0].thumbnail}` : emptyPlateImage} 
                         alt="day-thumbnail"
                         className={styles.dayMenu__thumbnail}    
                     />
@@ -71,7 +72,7 @@ export default function Menu() {
 
                 <div className={styles.dayMenu}>
                     <img 
-                        src={`https:${menu.days.kamis.length ? menu.days.kamis[0].thumbnail : ''}`} 
+                        src={menu.days.kamis.length ? `https:${menu.days.kamis[0].thumbnail}` : emptyPlateImage} 
                         alt="day-thumbnail"
                         className={styles.dayMenu__thumbnail}    
                     />
@@ -89,7 +90,7 @@ export default function Menu() {
 
                 <div className={styles.dayMenu}>
                     <img 
-                        src={`https:${menu.days.jumat.length ? menu.days.jumat[0].thumbnail : ''}`} 
+                        src={menu.days.jumat.length ? `https:${menu.days.jumat[0].thumbnail}` : emptyPlateImage} 
                         alt="day-thumbnail"
                         className={styles.dayMenu__thumbnail}    
                     />
