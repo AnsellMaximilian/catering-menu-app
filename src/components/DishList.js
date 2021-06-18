@@ -4,7 +4,7 @@ import MenuContext from '../contexts/Menu';
 import SettingsContext from '../contexts/Settings';
 import styles from './DishList.module.css';
 
-export default function DishList({nextPage, prevPage, page}) {
+export default function DishList({nextPage, prevPage, page, isEndPage}) {
 
     const {filteredDishes} = useContext(DishesContext)
     const {settings} = useContext(SettingsContext);
@@ -45,7 +45,7 @@ export default function DishList({nextPage, prevPage, page}) {
           </div>
           <div>
             <button onClick={prevPage} disabled={page === 0}>PREVIOUS</button>
-            <button onClick={nextPage}>NEXT</button>
+            <button onClick={nextPage} disabled={isEndPage}>NEXT</button>
           </div>
         </div>
     )

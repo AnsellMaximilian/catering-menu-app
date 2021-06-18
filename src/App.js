@@ -17,7 +17,10 @@ import defaultMenuThumbnail from './images/default-menu-thumbnail.jpg'
 function App() {
   const [dishes, setDishes] = useState([]);
   const [filteredDishes, setFilteredDishes] = useState([]);
-  const [settings, setSettings] = useState({day: 'senin'});
+  const [settings, setSettings] = useState({
+    day: 'senin',
+    pageLimit: 3
+  });
   const [menu, setMenu] = useState({
     menuThumbnail: defaultMenuThumbnail,
     dates: {
@@ -40,6 +43,7 @@ function App() {
   //PAGINATION AND FILTER
   const [page, setPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
+  const [itemTotal, setItemTotal] = useState(0);
 
   const print = () => {
     setIsCreateMode(false);
@@ -61,9 +65,10 @@ function App() {
   useEffect(() => {
     contentful.getEntries({
       'content_type': 'dish',
-      skip: !!searchTerm ? 0 : page*3,
+      skip: page*settings.pageLimit,
       "fields.name[match]": searchTerm,
-      limit: !!searchTerm ? 100 : 3
+      limit: settings.pageLimit,
+      order: 'fields.name'
     })
       .then(dishes => {
         const dishItems = dishes.items.map(item => {
@@ -75,10 +80,11 @@ function App() {
           return dishItem;
         });
         console.log(dishes);
+        setItemTotal(dishes.total);
         setDishes(dishItems);
         setFilteredDishes(dishItems);
       })
-  }, [page, searchTerm]);
+  }, [page, searchTerm, settings.pageLimit]);
 
   return (
     <div className="App">
@@ -94,7 +100,12 @@ function App() {
             {isCreateMode ? (
               <>
                 <ToolBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
-                <DishList nextPage={nextPage} prevPage={prevPage} page={page}/>
+                <DishList 
+                  nextPage={nextPage} 
+                  prevPage={prevPage} 
+                  page={page}
+                  isEndPage={itemTotal===(settings.pageLimit*(page+1))}
+                />
               </> 
             ): (
               <>

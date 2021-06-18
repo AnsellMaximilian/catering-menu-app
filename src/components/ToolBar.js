@@ -4,17 +4,8 @@ import SettingsContext from '../contexts/Settings';
 import styles from './Toolbar.module.css';
 
 export default function ToolBar({searchTerm, setSearchTerm}) {
-    // const {dishes, setFilteredDishes} = useContext(DishesContext);
     const {menu, setMenu} = useContext(MenuContext);
     const {settings, setSettings} = useContext(SettingsContext)
-
-    // useEffect(() => {
-    //     if(!!searchTerm){
-    //         setFilteredDishes(dishes.filter(dish => dish.name.toLowerCase().includes(searchTerm.toLowerCase())))
-    //     }else{
-    //         setFilteredDishes(dishes)
-    //     }
-    // }, [searchTerm, setFilteredDishes, dishes]);
 
     const setDay = (day) => {
         setSettings(state => {
@@ -83,9 +74,30 @@ export default function ToolBar({searchTerm, setSearchTerm}) {
                 </div>
 
             </div>
-            <div className={styles.searchContainer}>
-                <span>SEARCH</span>
-                <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
+            <div className={styles.bottomBar}>
+                <div className={styles.searchContainer}>
+                    <label>
+                        <span>SEARCH</span>
+                        <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
+                    </label>
+                </div>
+                <div className={styles.pageLimitContainer}>
+                    <label>
+                        <span>ITEMS PER PAGE</span>
+                        <input 
+                            type="number" 
+                            value={settings.pageLimit} 
+                            onChange={e => {
+                                const value = parseInt(e.target.value);
+                                if(!!value) {
+                                    const newState = {...settings};
+                                    newState.pageLimit = parseInt(value);
+                                    setSettings(newState);
+                                }
+                            }}
+                        /> 
+                    </label>
+                </div>
             </div>
         </div>
     )
