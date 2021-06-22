@@ -1,16 +1,26 @@
+.menuContainer {
+    width: 900px;
+    margin: 0 auto;
+}
+
+.menu {
+    border: black 1rem solid;
+}
+
 .dayMenu {
     border: 1rem solid black;
     margin: 1rem;
-    padding: 3rem;
+    /* padding: 3rem; */
     background-size: cover;
     background-repeat: no-repeat;
     width: 45%;
-    min-width: 400px;
+    /* min-width: 400px; */
     position: relative;
     color: white;
-    border-radius: 50%;
+    border-radius: 10% ;
     overflow: hidden;
-    height: 400px;
+    /* height: 400px; */
+    min-height: 300px;
 }
 
 .menuHeader {
@@ -54,6 +64,9 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    padding-top: 3rem;
+    /* padding: 3rem; */
+    position: relative;
 }
 
 .menuThumbnail {
@@ -68,21 +81,22 @@
 
 .dayMenu__thumbnail {
     position: absolute;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     width: 100%;
     height: 100%;
     object-fit: cover;
     top: 0;
     left: 0;
     filter: brightness(0.5);
+    z-index: -5;
 }
 
 .dayMenu__content {
-    position: absolute;
-    width: 100%;
+    position: relative;
+    /* width: 100%;
     height: 100%;
     top: 0;
-    left: 0;
+    left: 0; */
 }
 
 .dayMenu__title {
@@ -96,8 +110,23 @@
 .dayMenu__list {
     font-size: 1.5rem;
     font-weight: bold;
+    padding: 0 1rem 0 2rem;
+    margin-bottom: 2rem;
+    text-align: left;
+    list-style-type:disc;
 }
 
 .dayMenu__list li{
     margin: 1rem;
+}
+
+.menuBg {
+    position: absolute;
+    z-index: -5;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.25;
+    object-fit: cover;
 }

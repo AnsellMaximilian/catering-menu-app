@@ -1,107 +1,150 @@
 .dayTabs {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  max-width: 100%;
 }
 
 .dayTabs > .day {
-    cursor: pointer;
-    flex: 1;
-    padding: 10px;
-    border: 1px solid rgb(131, 131, 131);
+  cursor: pointer;
+  flex: 1;
+  padding: 10px 0;
+  border: 1px solid rgb(131, 131, 131);
+  text-transform: capitalize;
 }
 
 .dayTabs > .day:not(:first-child) {
-    border-left: none;
+  border-left: none;
 }
 
 .dayTabs > .day:hover {
-    background-color: rgb(194, 194, 194);
+  background-color: rgb(194, 194, 194);
 }
 
 .dayTabs > .day.selected {
-    background-color: black;
-    color: white;
-    font-weight: bold;
+  background-color: black;
+  color: white;
+  font-weight: bold;
 }
 
 .dayDashboard {
-    display: flex;
-    /* padding: 1.5rem; */
-
+  display: flex;
+  /* padding: 1.5rem; */
 }
 
 .selectedDishes {
-    text-align: left;
-    flex: 1;
-    border: rgb(131, 131, 131) 1px solid;
-    /* padding: 1rem; */
+  text-align: left;
+  flex: 1;
+  border: rgb(131, 131, 131) 1px solid;
+  /* padding: 1rem; */
 }
 
 .selectedDishes header {
-    display: flex;
+  display: flex;
 }
 
 .selectedDishes header button {
-    transition: all 0.15s;
-    padding: 0.5rem;
+  transition: all 0.15s;
+  padding: 0.5rem;
 }
 
 .selectedDishes__title {
-    font-weight: bold;
-    font-size: 1.25rem;
-    flex: 1;
+  font-weight: bold;
+  font-size: 1.25rem;
+  flex: 1;
+  padding-left: 1rem;
 }
 
-.selectedDishes > ul{
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
+.selectedDishes > ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
 }
 
 .selectedDishes > ul > li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid rgb(131, 131, 131);
-    display: flex;
-    align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgb(131, 131, 131);
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
 }
 
 .selectedDishes > ul > li:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .selectedDishes > ul > li > span {
-    flex: 1;
+  flex: 1;
 }
 
 .selectedDishes > ul > li > button {
-    transition: all 0.15s;
-    width: 2rem;
-    height: 2rem;
+  transition: all 0.15s;
+  width: 2rem;
+  height: 2rem;
 }
 
 .bottomBar {
-    margin-top: 3rem;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 3rem;
-    flex-wrap: wrap;
-    text-align: center;
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 1rem;
+  flex-wrap: wrap;
+  text-align: center;
+  max-width: 100%;
 }
 
-.searchContainer, .pageLimitContainer {
-    margin: 0 auto;
+.searchContainer span,
+.pageLimitContainer span {
+  margin-right: 1rem;
+  font-weight: bold;
+  font-size: 1.5rem;
 }
 
-.searchContainer span, .pageLimitContainer span {
-    margin-right: 1rem;
-    font-weight: bold;
-    font-size: 1.5rem;
-}
-
-.searchContainer input, .pageLimitContainer input {
-    font-size: 1.5rem;
+.searchContainer input,
+.pageLimitContainer input {
+  font-size: 1.5rem;
 }
 
 .pageLimitContainer input {
-    width: 4rem;
+  width: 4rem;
+}
+
+.searchContainer input {
+  max-width: 100%;
+}
+
+@media (max-width: 600px) {
+  .searchContainer {
+    order: 1;
+  }
+
+  .bottomBar {
+    text-align: left;
+  }
+
+  .bottomBar > .pageLimitContainer {
+    margin-bottom: 1rem;
+  }
+
+  .searchContainer,
+  .pageLimitContainer {
+    text-align: left;
+    margin: 0;
+    width: 100%;
+  }
+
+  .searchContainer label,
+  .pageLimitContainer label {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .searchContainer input,
+  .pageLimitContainer input,
+  .searchContainer span,
+  .pageLimitContainer span {
+    font-size: 1rem;
+  }
 }

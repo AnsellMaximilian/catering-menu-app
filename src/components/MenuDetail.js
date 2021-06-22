@@ -9,8 +9,8 @@ export default function MenuDetail({open, onClose}) {
 
     const [startDate, setStartDate] = useState(menu.dates.start);
     const [endDate, setEndDate] = useState(menu.dates.end);
-    const [menuThumbnail, setMenuThumbnail] = useState('');
-    const [backgroundImage, setBackgroundImage] = useState('');
+    const [menuThumbnail, setMenuThumbnail] = useState(menu.menuThumbnail);
+    const [backgroundImage, setBackgroundImage] = useState(menu.backgroundImage);
 
     return (
         <Modal open={open} onClose={onClose}>
@@ -55,8 +55,8 @@ export default function MenuDetail({open, onClose}) {
                         const newState = {...menu};
                         newState.dates.start = startDate;
                         newState.dates.end = endDate;
-                        newState.menuThumbnail = menuThumbnail;
-                        newState.backgroundImage = backgroundImage;
+                        newState.menuThumbnail = menuThumbnail || newState.menuThumbnail;
+                        newState.backgroundImage = backgroundImage || newState.backgroundImage;
                         setMenu(newState);
                         onClose();
                     }}

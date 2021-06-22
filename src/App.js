@@ -12,6 +12,7 @@ import Menu from './components/Menu';
 import DomToImage from 'dom-to-image';
 
 import defaultMenuThumbnail from './images/default-menu-thumbnail.jpg'
+import defaultMenuBg from './images/default-menu-bg.jpg'
 
 function App() {
   const [dishes, setDishes] = useState([]);
@@ -22,6 +23,7 @@ function App() {
   });
   const [menu, setMenu] = useState({
     menuThumbnail: defaultMenuThumbnail,
+    backgroundImage: defaultMenuBg,
     dates: {
         start: (new Date()).toISOString().slice(0, 10),
         end: new Date((new Date()).setDate((new Date()).getDate() + 7)).toISOString().slice(0, 10)
@@ -44,7 +46,6 @@ function App() {
   const [itemTotal, setItemTotal] = useState(0);
 
   const print = () => {
-    setIsCreateMode(false);
     DomToImage.toPng(document.querySelector('#menu'))
       .then(function (dataUrl) {
           var link = document.createElement('a');
@@ -90,7 +91,6 @@ function App() {
               openMenuDetail={() => setIsMenuDetailOpen(true)}
               setIsCreateMode={setIsCreateMode}
               isCreateMode={isCreateMode}
-              print={print}
             />
             {isCreateMode ? (
               <>
