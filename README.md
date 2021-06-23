@@ -1,8 +1,8 @@
 # Catering Menu Creation App
 
-A React application that consumes an API from headless CMS Contentful and displays the data (foods). From this data, user can construct a menu of different foods from Monday to Friday. User can then save the menu as an image with a push of a button.
+A React application that pulls in food (dishes) data from a headless CMS Contentful API and displays them on a webpage. The user can then build a menu of dishes for each day from Monday to Friday. The finished menu will be able to be printed and downloaded as a picture.
 
-## React app for creating the menu for a catering service at a given period (usually a week, from monday to friday).
+## REQUIREMENTS
 
 User can:
 
